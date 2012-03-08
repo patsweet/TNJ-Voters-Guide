@@ -1,0 +1,24 @@
+{% extends 'matchmaker/index.html' %}
+{% block title %}User Registration{% endblock %}
+{% block content %}
+{% if form_list %}
+<h3>Candidate registration for {{ user.question_set.all }}</h3>
+<p>Please take your time while answering these questions. Once you hit save, you will not be able to edit your responses. The News Journal, if necessary, will edit your responses for grammar and spelling or to remove inappropriate (e.g. libelous, profane) content. If you have any questions, please email an <a href="mailto:psweet@delawareonline.com">administrator</a> at any time or call 302-324-2909 during regular business hours.</p>
+<br />
+<form method="post" action=".">{% csrf_token %}
+	{% for question, form in form_list %}
+		{{ form.non_field_errors }}
+		<div class="answer_field_wrapper">
+			{{ form.answer.errors }}
+			<label for="id_{{ form.answer.html_name }}">{{ question }}</label>
+			{{ form.answer }}
+		</div>
+	{% endfor %}
+	<input type="submit" value="Save" />
+</form>
+{% else %}
+<h3>You have already completed all the questions.</h3>
+<p>To change an answer, please contact an <a href="mailto:psweet@delawareonline.com">administrator</a>.</p>
+{% endif %}
+
+{% endblock %}

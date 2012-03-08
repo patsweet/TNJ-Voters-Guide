@@ -1,0 +1,30 @@
+{% extends "matchmaker/index.html" %}
+
+{% block title%}
+	{{ race_info.race }}
+{% endblock %}
+
+{% block content %}
+		<h2>Candidates for the {{ race_info.race }}</h2>
+		    <table>
+		    {% for candidate in candidate_list %}
+			        <tr>
+	                    <td>
+			        	{% if candidate.mugshot %}
+			        		<img id="mugshotThumb" src="{{ candidate.mugshot.url }}" alt="{{ candidate.user.get_full_name }}" />
+			        	{% else %}
+			        		{% load static %}
+	                        <img id="mugshotThumb" src="{% get_static_prefix %}genAvatar.png" alt="No photo provided" />
+			        	{% endif %}
+	                    </td>
+	                    <td>
+	                    	<a href="/matchmaker/{{ race_info.id }}/{{ candidate.id }}">
+		                        {{ candidate.user.first_name }} {{ candidate.user.last_name }}
+               		        </a>
+	                    </td>
+			        </tr>
+		    {% empty %}
+		    	<h3>Uh oh! It looks like none of the candidates have filled out their profiles.</h3>
+		    {% endfor %}
+		    </table>
+{% endblock %}

@@ -1,0 +1,74 @@
+{% extends 'matchmaker/index.html' %}
+{% block title %}User Registration{% endblock %}
+{% block content %}
+<h1>Candidate registration for {{ user.race.race }}</h1>
+<form enctype="multipart/form-data" method="post" action=".">{% csrf_token %}
+	{{ pForm.non_field_errors }}
+	<div class="bio_field_wrapper">
+		{{ pForm.first_name.errors }}
+		<label for="id_first_name">First name</label>
+		{{ pForm.first_name }}
+	</div>
+	<div class="bio_field_wrapper">
+		{{ pForm.last_name.errors }}
+		<label for="id_last_name">Last name</label>
+		{{ pForm.last_name }}
+	</div>
+	<div class="bio_field_wrapper">
+		{{ pForm.email.errors }}
+		<label for="id_email">Email</label>
+		{{ pForm.email }}
+	</div>
+	<div class="bio_field_wrapper">
+		{{ pForm.birthday.errors }}
+		<label for="id_birthday">Birthday</label>
+		{{ pForm.birthday }}
+	</div>
+	<div class="bio_field_wrapper">
+		{{ pForm.mugshot.errors }}
+		<label for="id_mugshot">Headshot</label>
+		{{ pForm.mugshot }}
+	</div>
+	<div class="bio_field_wrapper">
+		{{ pForm.party.errors }}
+		<label for="id_party">Political party</label>
+		{{ pForm.party }}
+	</div>
+	<div class="bio_field_wrapper">
+		{{ pForm.occupation.errors }}
+		<label for="id_occupation">Occupation</label>
+		{{ pForm.occupation }}
+	</div>
+	<div class="bio_field_wrapper">
+		{{ pForm.education.errors }}
+		<label for="id_party">Education</label>
+		{{ pForm.education }}
+	</div>
+	<div class="bio_field_wrapper">
+		{{ pForm.website.errors }}
+		<label for="id_website">Website link</label>
+		{{ pForm.website }}
+	</div>
+	<div class="bio_field_wrapper">
+		{{ pForm.facebook.errors }}
+		<label for="id_facebook">Facebook link</label>
+		{{ pForm.facebook }}
+	</div>
+	<div class="bio_field_wrapper">
+		{{ pForm.twitter.errors }}
+		<label for="id_twitter">Twitter handle</label>
+		{{ pForm.twitter }}
+	</div>
+	<div class="bio_field_wrapper">
+		{{ pForm.accolades.errors }}
+		<label for="id_accolades">Accomplishments (limit 255 characters)</label>
+		{{ pForm.accolades }}
+	</div>
+	<div class="bio_field_wrapper">
+		{{ pForm.genStatement.errors }}
+		<label for="id_genStatement">Why elect you?</label>
+		{{ pForm.genStatement }}
+	</div>
+	<input type="submit" value="Save" />
+</form>
+{% endblock %}

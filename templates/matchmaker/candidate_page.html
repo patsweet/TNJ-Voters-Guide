@@ -1,0 +1,150 @@
+{% extends "matchmaker/index.html" %}
+{% load static %}
+{% block title %}
+	{{ candidate_info.user.get_full_name }} | {{ race_info.race }}
+{% endblock %}
+
+{% block content %}
+	<div id="candidate_page_left">
+		{% block candidate_page_left %}
+			{% if candidate_info.mugshot %}
+				<img id="mugshot" src="{{ candidate_info.mugshot.url }}" alt="{{ candidate_info.user.get_full_name }}"/>
+			{% else %}
+		    <img id="mugshot" src="{% get_static_prefix %}genAvatar.png" alt="No photo provided" />
+		    {% endif %}
+		    <div class="bioTitle">Age</div>
+		    {% if candidate_age %}
+		    	<div class="bioInfo">{{ candidate_age }}</div>
+		    {% else %}
+		    	<div class="bioInfo">No age submitted.</div>
+		    {% endif %}
+		    <div class="bioTitle">Party</div>
+			<div class="bioInfo">{{ candidate_info.party }}</div>
+			<div class="bioTitle">Education</div>
+			{% if candidate_info.education %}
+				<div class="bioInfo">{{ candidate_info.education }}</div>
+			{% else %}
+				<div class="bioInfo">No information submitted.</div>
+			{% endif %}
+			<div class="bioTitle">Occupation</div>
+			{% if candidate_info.occupation %}
+				<div class="bioInfo">{{ candidate_info.occupation }}</div>
+			{% else %}
+				<div class="bioInfor">No information submitted</div>
+			{% endif %}
+			<div class="bioTitle">Family</div>
+			{% if family_info %}
+				{% for family_member in family_info %}
+					<div class="bioInfo">{{ family_member.relationship }}: {{ family_member.name }}, {{ family_member.age }}</div>
+				{% endfor %}
+			{% else %}
+				<div class="bioInfo">No information submitted</div>
+			{% endif %}
+			<div class="bioTitle">Accolades</div>
+			{% if candidate_info.accolades %}
+				<div class="bioInfo">{{ candidate_info.accolades }}</div>
+			{% else %}
+				<div class="bioInfo">No information submitted</div>
+			{% endif %}
+		{% endblock %}
+	</div>
+	<div id="candidate_page_mainbar">
+		{% block candidate_page_main %}
+			<h2 id="candidateName">{{ candidate_info.user.get_full_name }}</h2>
+			<h3 id="raceTitle">Candidate for the {{ race_info.race }}</h3>
+		    <div id="qSection">
+		        {% for q, a in qAndA %}
+		            <h2 class="bigQ">Q</h2><p class="question">{{ forloop.counter }}. {{ q }}</p>
+		            <hr style="clear:both;" />
+		            <div class="answer">{{ a }}</div>
+		        {% empty %}
+		            <div>No Questions assigned to this race yet.</div>
+		        {% endfor %}
+		    </div>
+		    <div id="genStatement_wrapper">
+		    	<h3>Why elect me:</h3>
+		    	{% if candidate_info.genStatement %}
+		    		<div id="genStatement">
+		    			<p>{{ candidate_info.genStatement }}</p>
+		    		</div>
+		    	{% else %}
+		    		<div id="genStatement">
+		    			<p>No answer provided.</p>
+		    		</div>
+		    	{% endif %}
+		    </div>
+		{% endblock %}
+	</div>
+	<div id="candidate_page_right">
+		{% block candidate_page_right %}
+			{% if candidate_info.twitter %}
+				<script charset="utf-8" src="http://widgets.twimg.com/j/2/widget.js"></script>
+				<script>
+				new TWTR.Widget({
+				  version: 2,
+				  type: 'profile',
+				  rpp: 10,
+				  interval: 30000,
+				  width: 'auto',
+				  height: 400,
+				  theme: {
+				    shell: {
+				      background: '#76A1A1',
+				      color: '#ffffff'
+				    },
+				    tweets: {
+				      background: '#ffffff',
+				      color: '#000000',
+				      links: '#0729b0'
+				    }
+				  },
+				  features: {
+				    scrollbar: true,
+				    loop: false,
+				    live: true,
+				    behavior: 'all'
+				  }
+				}).render().setUser('{{ candidate_info.twitter }}').start();
+				</script>
+			{% endif %}
+		    <ul id="candWebLinks">
+			{% if candidate_info.website %}
+				<li>
+					<a href="{{ candidate_info.website }}">Website</a>
+				</li>
+			{% endif %}
+			{% if candidate_info.facebook %}
+				<li>
+					<a href="{{ candidate_info.facebook }}">Facebook</a>
+				</li>
+			{% endif %}
+			</ul>
+		{% endblock %}
+</div>
+<footer id="candPageFooter">
+<hr />
+<center>
+    <table>
+    	<caption>Candidates for {{ race_info.race }}</caption>
+        <tr>
+	        {% for candidate in candidate_list %}
+	            <td>
+	            	<a href="/matchmaker/{{ race_info.id }}/{{ candidate.id }}">
+			            {% if candidate.mugshot %}
+			            <img id="mugshotThumb" src="{{ candidate.mugshot.url }}" alt="{{ candidate.user.get_full_name }}" />
+			            {% else %}
+			            <img id="mugshotThumb" src="{% get_static_prefix %}genAvatar.png" alt="No photo provided" />
+			            {% endif %}
+	            	</a>
+	            </td>
+	        {% endfor %}
+        </tr>
+        <tr>
+	        {% for candidate in candidate_list %}
+	            <td style="text-align:center;" >{{ candidate.user.first_name}} {{ candidate.user.last_name}}</td>
+	        {% endfor %}
+        </tr>
+    </table>
+</center>
+</footer>
+{% endblock %}

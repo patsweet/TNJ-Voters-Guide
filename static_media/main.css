@@ -1,0 +1,67 @@
+@charset "UTF-8";
+
+body, a, p, img, h1, h2, h3, h4, h5, center, form, ul, ol, li, input {
+	margin:0;
+	padding:0;
+	list-style-type:none;
+	}
+body {
+    margin:0 10%;
+	width:960px;
+	}
+#candidate_page_left {
+	padding-right:5px;
+	float: left;
+	height:auto;
+	width:185px;
+	border-right:solid;
+	border-right-width:thin;
+}
+#candidate_page_mainbar {
+	float: left;
+	width:570px;
+	padding-left:5px;
+	padding-right:5px;
+}
+#candidate_page_right {
+	float: left;
+	width:180px;
+	padding-left:5px;
+	text-align:center;
+}
+#candidate_page_right li {
+	margin-bottom:5px;
+}
+#mugshot {
+	width:180px;
+	height:auto;
+    border-style:solid;
+    border-width:thin;
+}
+#mugshotThumb {
+    width:100px;
+    height:auto;
+    border-style:solid;
+    border-width:thin;
+}
+.bioTitle {
+	font-size:24px;
+	font-weight: bold;
+	text-align:left;
+}
+.bioInfo {
+	font-size:14px;
+}
+#raceTitle {
+	text-align:center;
+	width:100%;
+}
+#mainTitle {
+	float: left;
+}
+#loginStatus {
+	float: right;
+}
+#mainContent {
+	clear: both;
+}

@@ -1,0 +1,159 @@
+@charset "UTF-8";
+
+/* +++++ CLEAR DEFAULT STYLES +++++ */
+body, a, p, img, h1, h2, h3, h4, h5, center, form, ul, ol, li, input {
+	margin:0;
+	padding:0;
+	list-style-type:none;
+	font-family: Tahoma, Geneva, sans-serif;
+	}
+
+/* +++++ UNIVERSAL STYLES +++++ */
+body {
+    margin:0 auto;
+	width:960px;
+	}
+#header {
+    height:100px;
+    margin-top:10px;
+    border-bottom:solid;
+    border-bottom-width:thin;
+}
+
+#loginStatus {
+
+}
+#mainContent {
+	clear: both;
+	padding-top:10px;
+	min-height:600px;
+}
+#mugshotThumb {
+    width:100px;
+    height:auto;
+    border-style:solid;
+    border-width:thin;
+}
+
+/* +++++ RACE PAGE +++++ */
+#pastRaces {
+	margin-top:20px;
+}
+
+/* +++++ CANDIDATE PAGE +++++ */
+#candidate_page_mainbar {
+	float: left;
+	width:570px;
+	padding-left:5px;
+	padding-right:5px;
+}
+#candidateName {
+	font-size:220%;
+}
+#raceTitle {
+	text-align:left;
+	padding-left:20px;
+	padding-bottom:15px;
+	width:100%;
+}
+#qSection {
+	padding-left:15px;
+}
+.bigQ {
+	float:left;
+	clear:both;
+	font-size:250%;
+}
+.question {
+	padding-top:0;
+	padding-left:10px;
+	width:90%;
+	float:left;
+	font-weight:bold;
+}
+.answer {
+	clear: both;
+	padding-bottom:15px;
+	padding-left:20px;
+	font-size:95%;
+}
+#genStatement_wrapper {
+	clear:both;
+	padding:10px 0 10px 15px;
+}
+#genStatement {
+	padding:0 0 0 15px;
+	font-size:95%;
+}
+#candidate_page_left {
+	padding-right:5px;
+	float: left;
+	height:auto;
+	width:185px;
+/*	border-right:solid;
+	border-right-width:thin;*/
+}
+#mugshot {
+	width:180px;
+	height:auto;
+    border-style:solid;
+    border-width:thin;
+}
+.bioTitle {
+	font-size:24px;
+	font-weight: bold;
+	text-align:left;
+}
+.bioInfo {
+	font-size:14px;
+}
+
+#candidate_page_right {
+	float: left;
+	width:180px;
+	padding-left:5px;
+	text-align:center;
+}
+#candidate_page_right li {
+	margin-bottom:5px;
+}
+
+#candPageFooter {
+    clear:both;
+    padding-top:15px;
+}
+
+/* +++++ CANDIDATE BIO FORM +++++ */
+input, select, textarea {
+	display: block;
+}
+
+/* +++++ MATCHMAKER GAME +++++ */
+#matchmakerContent {
+	margin:10px 10%;
+}
+#matchmakerNav {
+	clear:both;
+	padding:15px 0 0 0;
+}
+.mmQuestion {
+	font-size:120%;
+	text-align:left;
+	clear:both;
+}
+.mmAnswerForm {
+	margin:0 10%;
+	clear:both;
+}
+.mmAnswerForm input {
+	display:inline;
+	margin:0 25px;
+	float:left;
+}
+.mmAnswerForm .mmAnswer {
+	padding:10px 0px;
+}
+#matchmakerContent #agree, #matchmakerContent #disagree {
+	float:left;
+	font-size:80%;
+}

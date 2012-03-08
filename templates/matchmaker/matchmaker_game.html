@@ -1,0 +1,83 @@
+{% extends 'matchmaker/index.html' %}
+{% block title %}The Matchmaker{% endblock %}
+{% block content %}
+<script type="text/javascript">
+
+	// Object containing our candidate information.
+	function Matchinfo (question, candidate, answer) {
+		this.question = question;
+		this.candidate = candidate;
+		this.answer = answer;
+		this.score = 0;
+		this.AddPoint = function(points) {
+			return this.score = this.score+points;
+		};
+	};
+
+	// Loop through the candidate info and make
+	// Matchinfo objects for each candidate and question.
+	// Should produce array of (# of questions * # of candidates) length.
+	var cand_info = new Array();
+	{% for candidate, question, answer in cand_info %}
+	cand_info[{{ forloop.counter0 }}] = new Matchinfo('{{question.question}}', '{{candidate.user.get_full_name}}', '{{ answer }}');
+	{% endfor %}
+	
+	console.log(cand_info.length); // DEBUG: Check that all Matchinfos are made.
+
+	// Pull unique questions from the cand_info array.
+	function findUniqueQuestions () {
+		var allQuestions = new Array();
+		for (i=0; i<cand_info.length; i++) {
+			allQuestions[i] = cand_info[i].question;
+		};
+		return jQuery.unique(allQuestions);
+	};
+	// Unique questions stored here:
+	var questions = findUniqueQuestions();
+	
+	console.log(questions); // DEBUG: Check that all questions are present. Should log 4 questions.
+
+	function MatchSection (question, answer_list) {
+		this.question = question;
+		this.answer_list = answer_list
+		this.createHtml = function() {
+			var pageQ = '<div class="mmQuestion">'+this.question+'</div>';
+			var pageA = "";
+			for (i=0; i<this.answer_list.length; i++) {
+				pageA = pageA+"<div class='mmAnswer'>"+this.answer_list[i]+"</div>";
+			};
+			return pageQ+pageA;
+		};
+	};
+
+	$("document").ready(function() {
+		for (i=0; i<questions.length; i++) {
+
+			$("#matchmakerContent").append(
+				"<div class='mmQuestion'>"+questions[i]+"</div>");
+
+			for (x=0; x<cand_info.length; x++) {
+				if (cand_info[x].question == questions[i]) {
+					$("#matchmakerContent").append(
+						"<form class='mmAnswerForm'><div class='mmAnswer'>"+cand_info[x].answer+"</div><div id='disagree'>Strongly disagree</div><input type='radio' name='"+cand_info[x].candidate+"_"+i+"' value='-2' /><input type='radio' name='"+cand_info[x].candidate+"_"+i+"' value='-1' /><input type='radio' name='"+cand_info[x].candidate+"_"+i+"' value='0' /><input type='radio' name='"+cand_info[x].candidate+"_"+i+"' value='1' /><input type='radio' name='"+cand_info[x].candidate+"_"+i+"' value='2' /><div id='agree'>Strongly agree</div></form>"
+					);
+				};
+			};
+			$("#matchmakerContent").wrap(
+				"<div id='q"+i+"'>"
+			);
+		};
+	});
+
+
+
+</script>
+	<div id="matchmakerContent">
+
+	</div>
+	<div id="matchmakerNav">
+		<center>
+			<input type="button" value="Next" />
+		</center>
+	</div>	
+{% endblock %}

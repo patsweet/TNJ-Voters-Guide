@@ -1,0 +1,62 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>{% block title %}Voters Guide{% endblock %}</title>
+    {% load static %}
+    <link href="{% get_static_prefix %}main.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" charset="utf8" src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.1.min.js"></script>
+    <script type="text/javascript">
+        function formHandler(form){
+            var URL = document.form.race.options[document.form.race.selectedIndex].value;
+            window.location.href = URL;
+        }
+    </script>
+</head>
+
+<body>
+    {% load static %}
+    <div id="header" style="background-image:url({% get_static_prefix %}mainHeader.png)"></div>
+    <div id="mainContent">
+    {% block content %}
+        {% if race_list %}
+            <form name="form">
+                <select name="race">
+                    {% for race in race_list %}
+                    <option value="http://127.0.0.1:8000/matchmaker/{{ race.id }}">{{ race.race }}</option>
+                    {% endfor %}
+                </select>
+                <input type=button value="Go!" onclick="javascript:formHandler()">
+            </form>
+        {% else %}
+            <h2>No currently active races available. View past elections below. </h1>
+        {% endif %}
+        {% if past_races %}
+        <div id="pastRaces">
+            <h3>View Past Races</h3>
+            <form name="form">
+                <select name="race">
+                    {% for race in past_races %}
+                    <option value="http://127.0.0.1:8000/matchmaker/{{ race.id }}">{{ race.race }}</option>
+                    {% endfor %}
+                </select>
+                <input type=button value="Go!" onclick="javascript:formHandler()">
+            </form>
+        </div>
+        {% endif %}
+    {% endblock %}
+    </div>
+    <div id="footer">
+        <center>
+            <div id="loginStatus">
+            {% if user.is_authenticated %}
+                <p>Welcome <a href="/matchmaker/{{ user.candidate.race.id }}/{{ user.candidate.id }}" >{{ user.get_full_name }}</a> | {{ user.last_login }} | <a href="/matchmaker/update">Edit Bio Page</a> | <a href="/matchmaker/logout/">Logout</a> | <a href="/matchmaker">Main</a></p>
+            {% else %}
+                <a href="/matchmaker">Main</a> | <a href="/matchmaker/login">Candidate Login</a> 
+            {% endif %}
+            </div>
+            
+        </center>
+    </div>
+</body>
+</html>

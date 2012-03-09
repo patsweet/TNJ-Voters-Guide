@@ -7,10 +7,19 @@
     <link href="{% get_static_prefix %}main.css" rel="stylesheet" type="text/css">
     <script type="text/javascript" charset="utf8" src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.1.min.js"></script>
     <script type="text/javascript">
-        function formHandler(form){
-            var URL = document.form.race.options[document.form.race.selectedIndex].value;
-            window.location.href = URL;
-        }
+        $("document").ready(function() {
+            
+            $("#candidate_list_button").click(function () {
+                var url = $("select :selected").val();
+                window.location.href = url;
+            });
+            
+            $("#play_matchgame_button").click(function () {
+                var url = $("select :selected").val();
+                window.location.href = url+"/match_game";
+            });
+        });
+      
     </script>
     <script type="text/javascript" charset="utf8" src="{% get_static_prefix %}formToWizard.js"></script>
 
@@ -28,7 +37,8 @@
                     <option value="http://127.0.0.1:8000/matchmaker/{{ race.id }}">{{ race.race }}</option>
                     {% endfor %}
                 </select>
-                <input type=button value="Go!" onclick="javascript:formHandler()">
+                <input id="candidate_list_button" type=button value="View Candidates" onclick="javascript:formHandler('false')">
+                <input id="play_matchgame_button" type=button value="Play Matchmaker" onclick="javascript:formHandler('true')">
             </form>
         {% else %}
             <h2>No currently active races available. View past elections below. </h1>

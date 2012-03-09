@@ -22,7 +22,6 @@
 	cand_info[{{ forloop.counter0 }}] = new Matchinfo('{{ question.question }}', '{{ candidate.id }}', '{{ answer }}');
 	{% endfor %}
 	
-	console.log(cand_info.length); // DEBUG: Check that all Matchinfos are made.
 
 	// Pull unique questions from the cand_info array.
 	function findUniqueQuestions () {
@@ -35,14 +34,13 @@
 	// Unique questions stored here:
 	var questions = findUniqueQuestions();
 	
-	console.log(questions); // DEBUG: Check that all questions are present. Should log 4 questions.
 
 	$("document").ready(function() {
 
 		// Dynamically set up our forms. 
-		for (i=0; i<questions.length; i++) {
+		for (i=questions.length-1; i>=0; i--) {
 			$("#mmForm").append(
-				"<fieldset id='question_"+i+"'></fieldset>"
+				"<fieldset class='question_wrapper' id='question_"+i+"'></fieldset>"
 			);
 
 			$("#question_"+i).append(
@@ -52,7 +50,7 @@
 			for (x=0; x<cand_info.length; x++) {
 				if (cand_info[x].question == questions[i]) {
 					$("#question_"+i).append(
-						"<div class='response_label'>Candidate response:</div><div class='mmAnswer'>"+cand_info[x].answer+"</div><div id='disagree'>Strongly disagree</div><input type='radio' name='"+i+"_"+cand_info[x].candidate+"' value='-2' /><input type='radio' name='"+i+"_"+cand_info[x].candidate+"' value='-1' /><input type='radio' name='"+i+"_"+cand_info[x].candidate+"' value='0' /><input type='radio' name='"+i+"_"+cand_info[x].candidate+"' value='1' /><input type='radio' name='"+i+"_"+cand_info[x].candidate+"' value='2' /><div id='agree'>Strongly agree</div>"
+						"<div class='response_label'>Candidate "+cand_info[x].candidate+"'s response:</div><div class='mmAnswer'>"+cand_info[x].answer+"</div><div class='radio_wrapper'><div id='disagree'>Strongly disagree</div><input type='radio' name='"+i+"_"+cand_info[x].candidate+"' value='-2' /><input type='radio' name='"+i+"_"+cand_info[x].candidate+"' value='-1' /><input type='radio' name='"+i+"_"+cand_info[x].candidate+"' value='0' /><input type='radio' name='"+i+"_"+cand_info[x].candidate+"' value='1' /><input type='radio' name='"+i+"_"+cand_info[x].candidate+"' value='2' /><div id='agree'>Strongly agree</div></div>"
 					);
 				};
 			};
@@ -68,7 +66,7 @@
 </script>
 <div id="gameWrapper">
 	{% if cand_info %}
-	<form id="mmForm" class='bbq'>
+	<form id="mmForm">
 	</form>
 	{% else %}
 	<h2>Shit! There are no questions!</h2>

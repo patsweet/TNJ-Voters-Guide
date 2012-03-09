@@ -130,11 +130,24 @@ input, select, textarea {
 
 /* +++++ MATCHMAKER GAME +++++ */
 #gameWrapper {
-	margin:0 10%;
+	margin:0 auto 10px auto;
+	width:700px;
+	padding:0 auto;
+	background-color:#D4D4D4;
+	-moz-box-shadow: 10px 10px 5px #888;
+	-webkit-box-shadow: 10px 10px 5px #888;
+	box-shadow: 10px 10px 5px #888;
+  	-webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+    border-radius: 15px;
+  	-moz-background-clip: padding; -webkit-background-clip: padding-box; background-clip: padding-box;
 }
 
 #mmForm fieldset {
-	border:none; width:600px;
+	border:none;
+	width:600px;
+	margin-right:auto;
+	margin-left:auto;
 }
 #mmForm legend {
 	font-size:18px;
@@ -165,13 +178,14 @@ input, select, textarea {
 }
 #steps {
 	list-style:none;
-	width:auto;
+	width:600px;
 	overflow:hidden;
-	margin:0px 10%;
+	margin-left:auto;
+	margin-right:auto;
 	padding:0px;
 }
 #steps li {
-	font-size:24px;
+	font-size:20px;
 	float:left;
 	padding:10px;
 	color:#b0b1b3;
@@ -184,28 +198,54 @@ input, select, textarea {
 	color:#000;
 }
 .mmQuestion {
-	font-size:120%;
+	font-size:125%;
 	font-weight:bold;
-	text-align:left;
+	text-align:center;
 	clear:both;
 }
 fieldset p {
 	clear:both;
+	width:;
 	padding-top:10px;
+	margin-right:auto;
+	margin-left:auto;
 }
-#mmForm input, #mmForm #agree, #mmForm #disagree {
+#mmForm input {
 	display:inline;
-	margin:0 10px;
+	margin:0 5%;
 	width:auto;
+
+}
+#mmForm #agree {
+	display:inline;
+	float:right;
 	font-size:80%;
+}
+#mmForm #disagree {
+	display:inline;
+	float:left;
+	font-size:80%;
+}
+.radio_wrapper {
+	margin-right:auto;
+	margin-left:auto;
+	width:500px;
 }
 #mmForm .response_label {
 	clear:both;
 	padding: 10px 0 0 0;
+	font-size:90%;
+
 }
 #mmForm .mmAnswer {
-	padding:0 0 5px 0;
-	font-size:95%;
+	padding:0 20px 5px 20px;
 	clear: both;
 	font-style:italic;
+
+}
+.submit_button {
+	display:block;
+	margin-left:25%;
+	margin-right:25%;
+
 }

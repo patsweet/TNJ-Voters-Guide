@@ -19,7 +19,7 @@
 	// Should produce array of (# of questions * # of candidates) length.
 	var cand_info = new Array();
 	{% for candidate, question, answer in cand_info %}
-	cand_info[{{ forloop.counter0 }}] = new Matchinfo('{{question.question}}', '{{candidate.user.get_full_name}}', '{{ answer }}');
+	cand_info[{{ forloop.counter0 }}] = new Matchinfo('{{ question.question }}', '{{ candidate.id }}', '{{ answer }}');
 	{% endfor %}
 	
 	console.log(cand_info.length); // DEBUG: Check that all Matchinfos are made.
@@ -37,47 +37,41 @@
 	
 	console.log(questions); // DEBUG: Check that all questions are present. Should log 4 questions.
 
-	function MatchSection (question, answer_list) {
-		this.question = question;
-		this.answer_list = answer_list
-		this.createHtml = function() {
-			var pageQ = '<div class="mmQuestion">'+this.question+'</div>';
-			var pageA = "";
-			for (i=0; i<this.answer_list.length; i++) {
-				pageA = pageA+"<div class='mmAnswer'>"+this.answer_list[i]+"</div>";
-			};
-			return pageQ+pageA;
-		};
-	};
-
 	$("document").ready(function() {
-		for (i=0; i<questions.length; i++) {
 
-			$("#matchmakerContent").append(
-				"<div class='mmQuestion'>"+questions[i]+"</div>");
+		// Dynamically set up our forms. 
+		for (i=0; i<questions.length; i++) {
+			$("#mmForm").append(
+				"<fieldset id='question_"+i+"'></fieldset>"
+			);
+
+			$("#question_"+i).append(
+				"<div class='mmQuestion'>"+questions[i]+"</div>"
+			);
 
 			for (x=0; x<cand_info.length; x++) {
 				if (cand_info[x].question == questions[i]) {
-					$("#matchmakerContent").append(
-						"<form class='mmAnswerForm'><div class='mmAnswer'>"+cand_info[x].answer+"</div><div id='disagree'>Strongly disagree</div><input type='radio' name='"+cand_info[x].candidate+"_"+i+"' value='-2' /><input type='radio' name='"+cand_info[x].candidate+"_"+i+"' value='-1' /><input type='radio' name='"+cand_info[x].candidate+"_"+i+"' value='0' /><input type='radio' name='"+cand_info[x].candidate+"_"+i+"' value='1' /><input type='radio' name='"+cand_info[x].candidate+"_"+i+"' value='2' /><div id='agree'>Strongly agree</div></form>"
+					$("#question_"+i).append(
+						"<div class='response_label'>Candidate response:</div><div class='mmAnswer'>"+cand_info[x].answer+"</div><div id='disagree'>Strongly disagree</div><input type='radio' name='"+i+"_"+cand_info[x].candidate+"' value='-2' /><input type='radio' name='"+i+"_"+cand_info[x].candidate+"' value='-1' /><input type='radio' name='"+i+"_"+cand_info[x].candidate+"' value='0' /><input type='radio' name='"+i+"_"+cand_info[x].candidate+"' value='1' /><input type='radio' name='"+i+"_"+cand_info[x].candidate+"' value='2' /><div id='agree'>Strongly agree</div>"
 					);
 				};
 			};
-			$("#matchmakerContent").wrap(
-				"<div id='q"+i+"'>"
-			);
 		};
-	});
 
+		$("#mmForm").append(
+			'<input class="submit_button" id="submit" value="Find me a candidate" type="button">'
+		);
 
+		$("#mmForm").formToWizard({ submitButton: 'submit' });
 
+}); 
 </script>
-	<div id="matchmakerContent">
-
-	</div>
-	<div id="matchmakerNav">
-		<center>
-			<input type="button" value="Next" />
-		</center>
-	</div>	
+<div id="gameWrapper">
+	{% if cand_info %}
+	<form id="mmForm" class='bbq'>
+	</form>
+	{% else %}
+	<h2>Shit! There are no questions!</h2>
+	{% endif %}
+</div>
 {% endblock %}

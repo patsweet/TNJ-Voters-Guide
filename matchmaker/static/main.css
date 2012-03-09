@@ -129,31 +129,83 @@ input, select, textarea {
 }
 
 /* +++++ MATCHMAKER GAME +++++ */
-#matchmakerContent {
-	margin:10px 10%;
+#gameWrapper {
+	margin:0 10%;
 }
-#matchmakerNav {
-	clear:both;
-	padding:15px 0 0 0;
+
+#mmForm fieldset {
+	border:none; width:600px;
+}
+#mmForm legend {
+	font-size:18px;
+	margin:0px;
+	padding:10px 0px;
+	color:#b0232a;
+	font-weight:bold;
+}
+#mmForm label {
+	display:block;
+	margin:15px 0 5px;
+}
+#mmForm .prev, #mmForm .next {
+	background-color:#b0232a;
+	padding:5px 10px;
+	color:#fff;
+	text-decoration:none;
+}
+#mmForm .prev:hover, #mmForm .next:hover {
+	background-color:#000;
+	text-decoration:none;
+}
+#mmForm .prev {
+	float:left;
+}
+#mmForm .next {
+	float:right;
+}
+#steps {
+	list-style:none;
+	width:auto;
+	overflow:hidden;
+	margin:0px 10%;
+	padding:0px;
+}
+#steps li {
+	font-size:24px;
+	float:left;
+	padding:10px;
+	color:#b0b1b3;
+}
+#steps li span {
+	font-size:11px;
+	display:block;
+}
+#steps li.current {
+	color:#000;
 }
 .mmQuestion {
 	font-size:120%;
+	font-weight:bold;
 	text-align:left;
 	clear:both;
 }
-.mmAnswerForm {
-	margin:0 10%;
+fieldset p {
 	clear:both;
+	padding-top:10px;
 }
-.mmAnswerForm input {
+#mmForm input, #mmForm #agree, #mmForm #disagree {
 	display:inline;
-	margin:0 25px;
-	float:left;
-}
-.mmAnswerForm .mmAnswer {
-	padding:10px 0px;
-}
-#matchmakerContent #agree, #matchmakerContent #disagree {
-	float:left;
+	margin:0 10px;
+	width:auto;
 	font-size:80%;
+}
+#mmForm .response_label {
+	clear:both;
+	padding: 10px 0 0 0;
+}
+#mmForm .mmAnswer {
+	padding:0 0 5px 0;
+	font-size:95%;
+	clear: both;
+	font-style:italic;
 }

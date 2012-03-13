@@ -92,6 +92,7 @@ def candidate_page(request, Race_id, Candidate_id):
 def matchmaker_game(request, Race_id):
     candidates = Candidate.objects.filter(race__exact=Race_id)
     questions = Question.objects.filter(race__exact=Race_id)
+    race_info = Race.objects.get(id__exact=Race_id)
     cand_info = []
     for question in questions:
         for candidate in candidates:
@@ -106,6 +107,7 @@ def matchmaker_game(request, Race_id):
         'cand_info':cand_info,
         'user': request.user,
         'questions':questions,
+        'race_info':race_info
         })
     return render_to_response('matchmaker/matchmaker_game.html', variables)
 

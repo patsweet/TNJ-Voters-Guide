@@ -6,6 +6,22 @@
     {% load static %}
     <link href="{% get_static_prefix %}main.css" rel="stylesheet" type="text/css">
     <script type="text/javascript" charset="utf8" src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.1.min.js"></script>
+</head>
+
+<body>
+    {% load static %}
+    <div id="header" style="background-image:url({% get_static_prefix %}mainHeader.png)"></div>
+    <div id="mainContent">
+    {% block content %}
+    <!-- Scripts/etc to run the index page -->
+    <link rel="stylesheet" href="http://code.leafletjs.com/leaflet-0.3.1/leaflet.css" />
+    <!--[if lte IE 8]>
+        <link rel="stylesheet" href="http://code.leafletjs.com/leaflet-0.3.1/leaflet.ie.css" />
+    <![endif]-->
+    <script type="text/javascript" src="http://code.leafletjs.com/leaflet-0.3.1/leaflet.js"></script>
+    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
+    <script type="application/json" src="{% get_static_prefix %}leaflet/schools.json"></script>
+    <script type="text/javascript" src="{% get_static_prefix %}leaflet/leafletembed.js"></script>
     <script type="text/javascript">
         $("document").ready(function() {
             
@@ -18,28 +34,36 @@
                 var url = $("select :selected").val();
                 window.location.href = url+"/match_game";
             });
+
+            $("#geo_button").click(function () {
+                var address = $("#geo_address").val();
+                myGeocoder(address);
+            })
+
+            initmap();
+
         });
       
     </script>
-    <script type="text/javascript" charset="utf8" src="{% get_static_prefix %}formToWizard.js"></script>
-
-</head>
-
-<body>
-    {% load static %}
-    <div id="header" style="background-image:url({% get_static_prefix %}mainHeader.png)"></div>
-    <div id="mainContent">
-    {% block content %}
         {% if race_list %}
+        <div id="nav_form">
+            <h2>Select your school board</h2>
             <form name="form">
                 <select name="race">
                     {% for race in race_list %}
                     <option value="http://127.0.0.1:8000/matchmaker/{{ race.id }}">{{ race.race }}</option>
                     {% endfor %}
                 </select>
-                <input id="candidate_list_button" type=button value="View Candidates" onclick="javascript:formHandler('false')">
-                <input id="play_matchgame_button" type=button value="Play Matchmaker" onclick="javascript:formHandler('true')">
+                <input id="candidate_list_button" type=button value="View Candidates">
+                <input id="play_matchgame_button" type=button value="Play Matchmaker">
             </form>
+        </div>
+        <div id="VoterMap_Wrapper">
+            <h2> Enter an address to find your district</h2>
+            <input id="geo_address" type=text value="123 MyStreet, MyCity">
+            <input id="geo_button" type=button value="Find my school board">
+            <div id="VoterMap"></div>
+        </div>
         {% else %}
             <h2>No currently active races available. View past elections below. </h1>
         {% endif %}

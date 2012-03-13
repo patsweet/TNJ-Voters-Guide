@@ -1,69 +1,31 @@
 {% extends 'matchmaker/index.html' %}
 {% block title %}The Matchmaker{% endblock %}
 {% block content %}
+{% load static %}
 <script type="text/javascript">
+	var cand_info = new Array();
 
 	// Object containing our candidate information.
 	function Matchinfo (question, candidate, answer) {
 		this.question = question;
 		this.candidate = candidate;
 		this.answer = answer;
-		this.score = 0;
-		this.AddPoint = function(points) {
-			return this.score = this.score+points;
-		};
-	};
-
-	// Loop through the candidate info and make
-	// Matchinfo objects for each candidate and question.
-	// Should produce array of (# of questions * # of candidates) length.
-	var cand_info = new Array();
+	}
 	{% for candidate, question, answer in cand_info %}
 	cand_info[{{ forloop.counter0 }}] = new Matchinfo('{{ question.question }}', '{{ candidate.id }}', '{{ answer }}');
 	{% endfor %}
-	
-
-	// Pull unique questions from the cand_info array.
-	function findUniqueQuestions () {
-		var allQuestions = new Array();
-		for (i=0; i<cand_info.length; i++) {
-			allQuestions[i] = cand_info[i].question;
-		};
-		return jQuery.unique(allQuestions);
-	};
-	// Unique questions stored here:
-	var questions = findUniqueQuestions();
-	
-
-	$("document").ready(function() {
-
-		// Dynamically set up our forms. 
-		for (i=questions.length-1; i>=0; i--) {
-			$("#mmForm").append(
-				"<fieldset class='question_wrapper' id='question_"+i+"'></fieldset>"
-			);
-
-			$("#question_"+i).append(
-				"<div class='mmQuestion'>"+questions[i]+"</div>"
-			);
-
-			for (x=0; x<cand_info.length; x++) {
-				if (cand_info[x].question == questions[i]) {
-					$("#question_"+i).append(
-						"<div class='response_label'>Candidate "+cand_info[x].candidate+"'s response:</div><div class='mmAnswer'>"+cand_info[x].answer+"</div><div class='radio_wrapper'><div id='disagree'>Strongly disagree</div><input type='radio' name='"+i+"_"+cand_info[x].candidate+"' value='-2' /><input type='radio' name='"+i+"_"+cand_info[x].candidate+"' value='-1' /><input type='radio' name='"+i+"_"+cand_info[x].candidate+"' value='0' /><input type='radio' name='"+i+"_"+cand_info[x].candidate+"' value='1' /><input type='radio' name='"+i+"_"+cand_info[x].candidate+"' value='2' /><div id='agree'>Strongly agree</div></div>"
-					);
-				};
-			};
-		};
-
-		$("#mmForm").append(
-			'<input class="submit_button" id="submit" value="Find me a candidate" type="button">'
-		);
-
-		$("#mmForm").formToWizard({ submitButton: 'submit' });
-
-}); 
 </script>
+<script type="text/javascript" charset="utf8" src="{% get_static_prefix %}formToWizard.js"></script>
+<script type="text/javascript" charset="utf8" src="{% get_static_prefix %}popup.js"></script>
+<script type="text/javascript" charset="utf8" src="{% get_static_prefix %}matchmaker.js"></script>
+
+
+<div id="mmWelcome">
+	<h2>Welcome to The News Journal's candidate matchmaker</h2>
+	<p>To help you identify which {{ race_info.race }} candidate you might be interested in voting for, we've asked each candidate to answer a series of questions.</p>
+	<p>The matchmaker gives you the anonymous answers and lets you decide which ones you agree - or disagree - with most. At the end, you'll be redirected to the bio page of the candidate you most identified with. Click start to begin:</p>
+	<input type='button' value="Start" id='mmStartButton'>
+</div>
 <div id="gameWrapper">
 	{% if cand_info %}
 	<form id="mmForm">
@@ -72,4 +34,16 @@
 	<h2>Shit! There are no questions!</h2>
 	{% endif %}
 </div>
+<div id="popupCandidate">  
+    <a id="popupCandidateClose">x</a>  
+    <h1>Title of our cool popup, yay!</h1>  
+    <p id="candidateArea">  
+        Here we have a simple but interesting sample of our new stuning and smooth popup. As you can see jQuery and CSS does it easy...  
+        <br/><br/>  
+        We can use it for popup-forms and more... just experiment!  
+        <br/><br/>  
+        Press ESCAPE, Click on X (right-top) or Click Out from the popup to close the popup!   
+    </p>  
+</div>  
+<div id="backgroundPopup"></div>  
 {% endblock %}

@@ -20,13 +20,14 @@ body {
     border-bottom-width:thin;
 }
 
-#loginStatus {
+#footer {
+	clear:both;
 
 }
 #mainContent {
 	clear: both;
 	padding-top:10px;
-	min-height:600px;
+	min-height:500px;
 }
 #mugshotThumb {
     width:100px;
@@ -36,8 +37,49 @@ body {
 }
 
 /* +++++ RACE PAGE +++++ */
+#nav_form {
+	width:450px;
+	float:left;
+	margin-right:auto;
+	margin-left:auto;
+
+}
+#nav_form, #nav_form input, #nav_form select {
+	display:block;
+	margin:0 auto 5px auto;
+}
+#nav_form h2 {
+	margin:0 auto 5px auto;
+	text-align:center;
+}
+#nav_form select {
+	width:250px;
+}
+#nav_form input {
+	width:200px;
+}
 #pastRaces {
 	margin-top:20px;
+}
+#VoterMap_Wrapper {
+	width:450px;
+	height:500px;
+	float:right;
+	margin: 0 auto 0 auto;
+	padding:0 10px;
+	border-left-style:solid;
+	border-left-width:thin;
+}
+#VoterMap_Wrapper input {
+	display:inline;
+	margin: 0 0 5px 0;
+	width:50%;
+}
+#VoterMap {
+	width:400px;
+	height:400px;
+	border-style:solid;
+	border-width:thin;
 }
 
 /* +++++ CANDIDATE PAGE +++++ */
@@ -124,12 +166,12 @@ body {
 }
 
 /* +++++ CANDIDATE BIO FORM +++++ */
-input, select, textarea {
+#updateBioForm input, #updateBioForm select, #updateBioForm textarea {
 	display: block;
 }
 
 /* +++++ MATCHMAKER GAME +++++ */
-#gameWrapper {
+#gameWrapper, #mmWelcome {
 	margin:0 auto 10px auto;
 	width:700px;
 	padding:0 auto;
@@ -142,7 +184,20 @@ input, select, textarea {
     border-radius: 15px;
   	-moz-background-clip: padding; -webkit-background-clip: padding-box; background-clip: padding-box;
 }
-
+#mmWelcome {
+	padding:10px;
+}
+#mmWelcome p {
+	margin:5px 5px;
+}
+#mmWelcome #mmStartButton {
+	margin-left:auto;
+	margin-right:auto;
+	font-size:24px;
+}
+#mmForm {
+	padding:0 0 5px 0;
+}
 #mmForm fieldset {
 	border:none;
 	width:600px;
@@ -159,6 +214,7 @@ input, select, textarea {
 #mmForm label {
 	display:block;
 	margin:15px 0 5px;
+
 }
 #mmForm .prev, #mmForm .next {
 	background-color:#b0232a;
@@ -183,10 +239,11 @@ input, select, textarea {
 	margin-left:auto;
 	margin-right:auto;
 	padding:0px;
+	text-align:center;
 }
 #steps li {
 	font-size:20px;
-	float:left;
+	display:inline;
 	padding:10px;
 	color:#b0b1b3;
 }
@@ -243,9 +300,57 @@ fieldset p {
 	font-style:italic;
 
 }
-.submit_button {
+#mmForm .submit_button {
+	clear:both;
 	display:block;
-	margin-left:25%;
-	margin-right:25%;
-
+	margin-left:auto;
+	margin-right:auto;
+	margin-bottom:15px;
+	font-size:20px;
 }
+
+/* +++++ POPUP CANDIDATE STLES FOR MATCHMAKER GAME +++++ */
+
+#backgroundPopup {  
+display:none;  
+position:fixed;  
+_position:absolute; /* hack for internet explorer 6*/  
+height:100%;  
+width:100%;  
+top:0;  
+left:0;  
+background:#000000;  
+border:1px solid #cecece;  
+z-index:1;  
+}  
+#popupCandidate {  
+display:none;  
+position:fixed;  
+_position:absolute; /* hack for internet explorer 6*/  
+height:384px;  
+width:408px;  
+background:#FFFFFF;  
+border:2px solid #cecece;  
+z-index:2;  
+padding:12px;  
+font-size:13px;  
+}  
+#popupCandidate h1{  
+text-align:left;  
+color:#6FA5FD;  
+font-size:22px;  
+font-weight:700;  
+border-bottom:1px dotted #D3D3D3;  
+padding-bottom:2px;  
+margin-bottom:20px;  
+}  
+#popupCandidateClose{  
+font-size:14px;  
+line-height:14px;  
+right:6px;  
+top:4px;  
+position:absolute;  
+color:#6fa5fd;  
+font-weight:700;  
+display:block;  
+}  

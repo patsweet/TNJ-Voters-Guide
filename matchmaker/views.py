@@ -10,11 +10,20 @@ from datetime import date
 # Main Page with all races.
 def index(request):
     today = date.today()
-    race_list = Race.objects.filter(election_date__gte=today).order_by('race')
+    race_list = []
+    unopposed = []
+    rList = Race.objects.filter(election_date__gte=today).order_by('race')
     past_races = Race.objects.filter(election_date__lte=today).order_by('race')
+    for r in rList:
+        c = Candidate.objects.filter(race=r)
+        if len(c) > 1:
+            race_list.append(r)
+        else:
+            unopposed.append(r)
     variables = RequestContext(request, {
         'past_races': past_races,
         'race_list': race_list,
+        'unopposed': unopposed,
         'user': request.user
     })
 
@@ -47,14 +56,17 @@ def candidate_page(request, Race_id, Candidate_id):
     # Calculate Candidates Age
     today = date.today()
     born = candidate_info.birthday
-    try: # raised when birth date is February 29 and the current year is not a leap year
-        birthday = born.replace(year=today.year)
-    except ValueError:
-        birthday = born.replace(year=today.year, day=born.day-1)
-    if birthday > today:
-        candidate_age = today.year - born.year - 1
+    if born:
+        try: # raised when birth date is February 29 and the current year is not a leap year
+            birthday = born.replace(year=today.year)
+        except ValueError:
+            birthday = born.replace(year=today.year, day=born.day-1)
+        if birthday > today:
+            candidate_age = today.year - born.year - 1
+        else:
+            candidate_age = today.year - born.year
     else:
-        candidate_age = today.year - born.year
+        candidate_age = "Not Provided"
 
     # Race Info for the Header and Footer information
     race_info = Race.objects.get(id__exact=Race_id)

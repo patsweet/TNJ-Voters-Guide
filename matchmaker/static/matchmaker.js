@@ -62,7 +62,7 @@ $("document").ready(function() {
 			for (x=0; x<cand_info.length; x++) {
 				if (cand_info[x].question == questions[i]) {
 					$("#question_"+i).append(
-						"<div class='response_label'>Candidate "+cand_info[x].candidate+"'s response:</div><div class='mmAnswer'>"+cand_info[x].answer+"</div><div class='radio_wrapper'><div id='disagree'>Strongly disagree</div><input type='radio' name='"+i+"_"+cand_info[x].candidate+"' value='-2' /><input type='radio' name='"+i+"_"+cand_info[x].candidate+"' value='-1' /><input type='radio' name='"+i+"_"+cand_info[x].candidate+"' value='0' /><input type='radio' name='"+i+"_"+cand_info[x].candidate+"' value='1' /><input type='radio' name='"+i+"_"+cand_info[x].candidate+"' value='2' /><div id='agree'>Strongly agree</div></div>"
+						"<div class='response_label'>Candidate's response:</div><div class='mmAnswer'>"+cand_info[x].answer+"</div><div class='radio_wrapper'><div id='disagree'>Strongly disagree</div><input type='radio' name='"+i+"_"+cand_info[x].candidate+"' value='-2' /><input type='radio' name='"+i+"_"+cand_info[x].candidate+"' value='-1' /><input type='radio' name='"+i+"_"+cand_info[x].candidate+"' value='0' /><input type='radio' name='"+i+"_"+cand_info[x].candidate+"' value='1' /><input type='radio' name='"+i+"_"+cand_info[x].candidate+"' value='2' /><div id='agree'>Strongly agree</div></div>"
 					);
 				};
 			};

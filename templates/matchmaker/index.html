@@ -10,7 +10,7 @@
 
 <body>
     {% load static %}
-    <div id="header" style="background-image:url({% get_static_prefix %}mainHeader.png)"></div>
+    <a href="/matchmaker"><div id="header" style="background-image:url({% get_static_prefix %}mainHeader.png)"></div></a>
     <div id="mainContent">
     {% block content %}
     <!-- Scripts/etc to run the index page -->
@@ -25,45 +25,50 @@
     <script type="text/javascript">
         $("document").ready(function() {
             
-            $("#candidate_list_button").click(function () {
+            $("#unopposed_btn").click(function () {
                 var url = $("select :selected").val();
                 window.location.href = url;
             });
             
-            $("#play_matchgame_button").click(function () {
-                var url = $("select :selected").val();
-                window.location.href = url+"/match_game";
-            });
-
-            $("#geo_button").click(function () {
-                var address = $("#geo_address").val();
-                myGeocoder(address);
-            })
-
-            initmap();
-
-        });
+         });
       
     </script>
+     <div id="nav_form">
         {% if race_list %}
-        <div id="nav_form">
-            <h2>Select your school board</h2>
-            <form name="form">
-                <select name="race">
-                    {% for race in race_list %}
-                    <option value="http://127.0.0.1:8000/matchmaker/{{ race.id }}">{{ race.race }}</option>
-                    {% endfor %}
-                </select>
-                <input id="candidate_list_button" type=button value="View Candidates">
-                <input id="play_matchgame_button" type=button value="Play Matchmaker">
-            </form>
+        <div id="comp_races">
+            <h2>Upcoming Elections</h2>
+            {% for race in race_list %}
+            <table class="race_nav_wrapper">
+                <caption>{{ race.race }}</caption>
+                <tr>
+                    <td>
+                        <a class="race_nav_link" href="/matchmaker/{{ race.id }}">View Candidates</a>
+                    </td>
+                    <td>
+                        <a class="race_nav_link" href="/matchmaker/{{ race.id }}/match_game">Play Matchmaker</a>
+                    </td>
+                </tr>
+            </table>
+            {% endfor %}
         </div>
-        <div id="VoterMap_Wrapper">
+        <div class="unopposed_nav_wrapper">
+            <h3 style="clear:both;">Unopposed races</h3>
+            <form name="form">
+                <select name="unopposed_races">
+                   {% for race in unopposed %}
+                        <option value="/matchmaker/{{ race.id }}">{{ race.race }}</option>
+                        {% endfor %}
+                    </select>
+            </form>
+            <a id="unopposed_btn" href="#">View Candidate</a>
+        </div>
+    </div>
+<!--         <div id="VoterMap_Wrapper">
             <h2> Enter an address to find your district</h2>
             <input id="geo_address" type=text value="123 MyStreet, MyCity">
             <input id="geo_button" type=button value="Find my school board">
             <div id="VoterMap"></div>
-        </div>
+        </div> -->
         {% else %}
             <h2>No currently active races available. View past elections below. </h1>
         {% endif %}
@@ -73,7 +78,7 @@
             <form name="form">
                 <select name="race">
                     {% for race in past_races %}
-                    <option value="http://127.0.0.1:8000/matchmaker/{{ race.id }}">{{ race.race }}</option>
+                    <option value="/matchmaker/{{ race.id }}">{{ race.race }}</option>
                     {% endfor %}
                 </select>
                 <input type=button value="Go!" onclick="javascript:formHandler()">

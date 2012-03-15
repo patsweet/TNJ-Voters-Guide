@@ -94,7 +94,9 @@ class Race(models.Model):
     """
     race = models.CharField(max_length=255)
     election_date = models.DateField('Election Date', null=True)
-    active = models.BooleanField()
+    term = models.IntegerField('Term (years)', default=4)
+    winners = models.IntegerField('Number of winners', default=1)
+    active = models.BooleanField(default=True)
     
     def __unicode__(self):
         return self.race

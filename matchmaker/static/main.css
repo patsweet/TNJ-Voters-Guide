@@ -1,6 +1,10 @@
 @charset "UTF-8";
 
-/* +++++ CLEAR DEFAULT STYLES +++++ */
+/* 
+	++++++++++++++++++++++++++
+	++ CLEAR DEFAULT STYLES ++
+	++++++++++++++++++++++++++
+*/
 body, a, p, img, h1, h2, h3, h4, h5, center, form, ul, ol, li, input {
 	margin:0;
 	padding:0;
@@ -8,25 +12,27 @@ body, a, p, img, h1, h2, h3, h4, h5, center, form, ul, ol, li, input {
 	font-family: Tahoma, Geneva, sans-serif;
 	}
 
-/* +++++ UNIVERSAL STYLES +++++ */
+/*
+	++++++++++++++++++++++
+	++ UNIVERSAL STYLES ++
+	++++++++++++++++++++++
+*/
 body {
-    margin:0 auto;
+    margin:0px auto 0px auto;
 	width:960px;
 	}
 #header {
     height:100px;
-    margin-top:10px;
-    border-bottom:solid;
-    border-bottom-width:thin;
+    margin:10px 0px 0px 0px;
 }
 
 #footer {
 	clear:both;
-
 }
 #mainContent {
+	width:960px;
 	clear: both;
-	padding-top:10px;
+	padding:10px 0px 0px 0px;
 	min-height:500px;
 }
 #mugshotThumb {
@@ -36,14 +42,66 @@ body {
     border-width:thin;
 }
 
-/* +++++ RACE PAGE +++++ */
+/*
+	+++++++++++++++
+	++ RACE PAGE ++
+	+++++++++++++++
+*/
 #nav_form {
-	width:450px;
-	float:left;
+	width:auto;
 	margin-right:auto;
 	margin-left:auto;
-
+	text-align:center;
 }
+/*	UNOPPOSED RACES */
+#nav_form .unopposed_nav_wrapper {
+	width:auto;
+	margin:10px auto 10px auto;
+	text-align:center;
+}
+#nav_form .unopposed_nav_wrapper a {
+	background-color:#E0162B;
+	padding:5px 10px;
+	margin-top:20px;
+	margin-left:auto;
+	margin-right:auto;
+	color:#fff;
+	text-decoration:none;
+	text-align:center;
+}
+#nav_form .unopposed_nav_wrapper form {
+	padding:10px 20px;
+	text-align:center;
+}
+#nav_form .unopposed_nav_wrapper a:hover {
+	background-color:#0052A5;
+	text-decoration:none;
+}
+/*	COMPETITIVE RACES */
+#nav_form .race_nav_wrapper {
+	width:auto;
+	padding:0 10px 0 10px;
+	margin-bottom:20px;
+	margin-right:auto;
+	margin-left:auto;
+	text-align:center;
+	float:left;
+}
+#nav_form .race_nav_wrapper a {
+	width:auto;
+	display: inline;
+	background-color:#E0162B;
+	padding:5px 10px;
+	color:#fff;
+	text-decoration:none;
+	float:left;
+	text-align:center;
+}
+#nav_form .race_nav_wrapper a:hover {
+	background-color:#0052A5;
+	text-decoration:none;
+}
+
 #nav_form, #nav_form input, #nav_form select {
 	display:block;
 	margin:0 auto 5px auto;
@@ -61,6 +119,7 @@ body {
 #pastRaces {
 	margin-top:20px;
 }
+/* VOTER MAP */
 #VoterMap_Wrapper {
 	width:450px;
 	height:500px;
@@ -82,95 +141,106 @@ body {
 	border-width:thin;
 }
 
-/* +++++ CANDIDATE PAGE +++++ */
+/*
+	++++++++++++++++++++
+	++ CANDIDATE PAGE ++ 
+	++++++++++++++++++++
+*/
+/* MAIN SECTION */
 #candidate_page_mainbar {
-	float: left;
-	width:570px;
-	padding-left:5px;
-	padding-right:5px;
-}
-#candidateName {
-	font-size:220%;
-}
-#raceTitle {
-	text-align:left;
-	padding-left:20px;
-	padding-bottom:15px;
-	width:100%;
-}
-#qSection {
-	padding-left:15px;
-}
-.bigQ {
 	float:left;
-	clear:both;
-	font-size:250%;
+	width:475px;
+	padding:0px 5px 0px 5px;
 }
-.question {
-	padding-top:0;
-	padding-left:10px;
-	width:90%;
+#candidate_page_mainbar #candidateName {
+	font-size:200%;
+}
+#candidate_page_mainbar #raceTitle {
+	text-align:left;
+	font-size:95%;
+	padding:0px 0px 15px 20px;
+}
+#candidate_page_mainbar #qSection {
+	padding:0px 0px 0px 15px;
+}
+#candidate_page_mainbar .question {
+	padding:0px 0px 10px 5px;
+	width:auto;
 	float:left;
 	font-weight:bold;
 }
-.answer {
-	clear: both;
-	padding-bottom:15px;
-	padding-left:20px;
-	font-size:95%;
-}
-#genStatement_wrapper {
+#candidate_page_mainbar .answer {
 	clear:both;
-	padding:10px 0 10px 15px;
-}
-#genStatement {
-	padding:0 0 0 15px;
+	padding:0px 0px 15px 15px;
 	font-size:95%;
 }
+#candidate_page_mainbar #genStatement_wrapper {
+	clear:both;
+	margin:10px 0px 10px 15px;
+}
+#candidate_page_mainbar #genStatement {
+	padding:0px 0px 0px 15px;
+	font-size:95%;
+}
+
+/* SIDEBAR - LEFT */
 #candidate_page_left {
-	padding-right:5px;
-	float: left;
-	height:auto;
+	float:left;
+	height:100%;
 	width:185px;
-/*	border-right:solid;
-	border-right-width:thin;*/
+	padding:10px 5px 10px 5px;
 }
-#mugshot {
-	width:180px;
+#candidate_page_left #mugshot {
+	width:170px;
 	height:auto;
-    border-style:solid;
+	margin:0px auto 0px auto;
+	border-style:solid;
     border-width:thin;
+    background-color:#fff;
 }
-.bioTitle {
+#candidate_page_left .bioTitle {
 	font-size:24px;
 	font-weight: bold;
 	text-align:left;
 }
-.bioInfo {
+#candidate_page_left .bioInfo {
 	font-size:14px;
 }
-
+/* SIDEBAR - RIGHT */
 #candidate_page_right {
-	float: left;
-	width:180px;
-	padding-left:5px;
+	float: right;
+	width:auto;
+	padding:5px 5px 10px 5px;
+	margin:0px 0px 5px 0px;
 	text-align:center;
+	border-style:solid #dddddd;
+	border-width:thin;
+	background-color:#dddddd;
 }
 #candidate_page_right li {
-	margin-bottom:5px;
+	padding:0px 0px 5px 0px;
 }
 
+/* FOOTER */
 #candPageFooter {
     clear:both;
-    padding-top:15px;
+    margin-top:15px;
 }
 
-/* +++++ CANDIDATE BIO FORM +++++ */
+/*
+	++++++++++++++++++++++++
+	++ CANDIDATE BIO FORM ++
+	++++++++++++++++++++++++
+*/
 #updateBioForm input, #updateBioForm select, #updateBioForm textarea {
 	display: block;
 }
 
-/* +++++ MATCHMAKER GAME +++++ */
+/*
+	+++++++++++++++++++++
+	++ MATCHMAKER GAME ++
+	+++++++++++++++++++++
+*/
 #gameWrapper, #mmWelcome {
 	margin:0 auto 10px auto;
 	width:700px;
@@ -184,6 +254,7 @@ body {
     border-radius: 15px;
   	-moz-background-clip: padding; -webkit-background-clip: padding-box; background-clip: padding-box;
 }
+/* WELCOME SCREEN */
 #mmWelcome {
 	padding:10px;
 }
@@ -195,6 +266,7 @@ body {
 	margin-right:auto;
 	font-size:24px;
 }
+/* GAME SCREEN */
 #mmForm {
 	padding:0 0 5px 0;
 }
@@ -204,7 +276,7 @@ body {
 	margin-right:auto;
 	margin-left:auto;
 }
-#mmForm legend {
+#gameWrapper legend {
 	font-size:18px;
 	margin:0px;
 	padding:10px 0px;
@@ -232,7 +304,7 @@ body {
 #mmForm .next {
 	float:right;
 }
-#steps {
+#gameWrapper #steps {
 	list-style:none;
 	width:600px;
 	overflow:hidden;
@@ -241,26 +313,26 @@ body {
 	padding:0px;
 	text-align:center;
 }
-#steps li {
+#gameWrapper #steps li {
 	font-size:20px;
 	display:inline;
 	padding:10px;
 	color:#b0b1b3;
 }
-#steps li span {
+#gameWrapper #steps li span {
 	font-size:11px;
 	display:block;
 }
-#steps li.current {
+#gameWrapper #steps li.current {
 	color:#000;
 }
-.mmQuestion {
+#mmForm .mmQuestion {
 	font-size:125%;
 	font-weight:bold;
 	text-align:center;
 	clear:both;
 }
-fieldset p {
+#mmForm fieldset p {
 	clear:both;
 	width:;
 	padding-top:10px;
@@ -283,7 +355,7 @@ fieldset p {
 	float:left;
 	font-size:80%;
 }
-.radio_wrapper {
+#mmForm .radio_wrapper {
 	margin-right:auto;
 	margin-left:auto;
 	width:500px;
@@ -312,45 +384,45 @@ fieldset p {
 /* +++++ POPUP CANDIDATE STLES FOR MATCHMAKER GAME +++++ */
 
 #backgroundPopup {  
-display:none;  
-position:fixed;  
-_position:absolute; /* hack for internet explorer 6*/  
-height:100%;  
-width:100%;  
-top:0;  
-left:0;  
-background:#000000;  
-border:1px solid #cecece;  
-z-index:1;  
+	display:none;  
+	position:fixed;  
+	_position:absolute; /* hack for internet explorer 6*/  
+	height:100%;  
+	width:100%;  
+	top:0;  
+	left:0;  
+	background:#000000;  
+	border:1px solid #cecece;  
+	z-index:1;  
 }  
 #popupCandidate {  
-display:none;  
-position:fixed;  
-_position:absolute; /* hack for internet explorer 6*/  
-height:384px;  
-width:408px;  
-background:#FFFFFF;  
-border:2px solid #cecece;  
-z-index:2;  
-padding:12px;  
-font-size:13px;  
-}  
+	display:none;  
+	position:fixed;  
+	_position:absolute; /* hack for internet explorer 6*/  
+	height:384px;  
+	width:408px;  
+	background:#FFFFFF;  
+	border:2px solid #cecece;  
+	z-index:2;  
+	padding:12px;  
+	font-size:13px;  
+	}  
 #popupCandidate h1{  
-text-align:left;  
-color:#6FA5FD;  
-font-size:22px;  
-font-weight:700;  
-border-bottom:1px dotted #D3D3D3;  
-padding-bottom:2px;  
-margin-bottom:20px;  
+	text-align:left;  
+	color:#6FA5FD;  
+	font-size:22px;  
+	font-weight:700;  
+	border-bottom:1px dotted #D3D3D3;  
+	padding-bottom:2px;  
+	margin-bottom:20px;  
 }  
 #popupCandidateClose{  
-font-size:14px;  
-line-height:14px;  
-right:6px;  
-top:4px;  
-position:absolute;  
-color:#6fa5fd;  
-font-weight:700;  
-display:block;  
+	font-size:14px;  
+	line-height:14px;  
+	right:6px;  
+	top:4px;  
+	position:absolute;  
+	color:#6fa5fd;  
+	font-weight:700;  
+	display:block;  
 }  

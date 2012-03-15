@@ -24,13 +24,20 @@ class AnswerAdmin(admin.ModelAdmin):
 
 class QuestionAdmin(admin.ModelAdmin):
     list_display = ('question',)
-    seach_fields = ['question']
+    search_fields = ['question']
     filter_horizontal = ['race']
 
+class RaceAdmin(admin.ModelAdmin):
+    list_display = ('race', 'election_date', 'term', 'winners', 'active')
+    ordering = ['race']
+    date_hierarchy = 'election_date'
+    list_filter = ['election_date', 'active']
+    search_fields = ['race']
+    
 
 
 admin.site.register(Candidate, CandidateAdmin)
 admin.site.register(Party)
 admin.site.register(Question, QuestionAdmin)
-admin.site.register(Race)
+admin.site.register(Race, RaceAdmin)
 admin.site.register(Answer, AnswerAdmin)

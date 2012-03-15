@@ -12,7 +12,7 @@
 		this.answer = answer;
 	}
 	{% for candidate, question, answer in cand_info %}
-	cand_info[{{ forloop.counter0 }}] = new Matchinfo('{{ question.question }}', '{{ candidate.id }}', '{{ answer }}');
+	cand_info[{{ forloop.counter0 }}] = new Matchinfo('{{ question.question }}', {{ candidate.id }}, '{{ answer }}');
 	{% endfor %}
 </script>
 <script type="text/javascript" charset="utf8" src="{% get_static_prefix %}formToWizard.js"></script>

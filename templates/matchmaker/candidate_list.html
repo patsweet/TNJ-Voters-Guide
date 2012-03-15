@@ -6,6 +6,7 @@
 
 {% block content %}
 		<h2>Candidates for the {{ race_info.race }}</h2>
+		<p>These candidates are running for {{ race_info.winners }} seat on the {{ race_info.race }}. Whoever wins will serve a {{ race_info.term }}-year term.</p> 
 		    <table>
 		    {% for candidate in candidate_list %}
 			        <tr>
@@ -19,7 +20,7 @@
 	                    </td>
 	                    <td>
 	                    	<a href="/matchmaker/{{ race_info.id }}/{{ candidate.id }}">
-		                        {{ candidate.user.first_name }} {{ candidate.user.last_name }}
+		                        {{ candidate.user.get_full_name }}
                		        </a>
 	                    </td>
 			        </tr>

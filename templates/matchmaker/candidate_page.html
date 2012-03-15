@@ -54,11 +54,10 @@
 			<h3 id="raceTitle">Candidate for the {{ race_info.race }}</h3>
 		    <div id="qSection">
 		        {% for q, a in qAndA %}
-		            <h2 class="bigQ">Q</h2><p class="question">{{ forloop.counter }}. {{ q }}</p>
-		            <hr style="clear:both;" />
+		            <p class="question">{{ forloop.counter }}. {{ q }}</p>
 		            <div class="answer">{{ a }}</div>
 		        {% empty %}
-		            <div>No Questions assigned to this race yet.</div>
+		            <div class="question">No Questions assigned to this race yet.</div>
 		        {% endfor %}
 		    </div>
 		    <div id="genStatement_wrapper">
@@ -85,7 +84,7 @@
 				  type: 'profile',
 				  rpp: 10,
 				  interval: 30000,
-				  width: 'auto',
+				  width: 250,
 				  height: 400,
 				  theme: {
 				    shell: {
